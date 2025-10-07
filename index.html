@@ -5,38 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>KothaTales | Official Info</title>
   <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #222222;
+      --link-color: #007BFF;
+    }
+  
+    [data-theme="dark"] {
+      --bg-color: #121212;
+      --text-color: #eeeeee;
+      --link-color: #66ccff;
+    }
+  
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f9f9f9;
-      color: #333;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Segoe UI', sans-serif;
+      padding: 2rem;
+      line-height: 1.7;
+      transition: background-color 0.3s, color 0.3s;
+    }
+  
+    nav {
       text-align: center;
-      padding: 60px 20px;
+      margin-bottom: 2rem;
     }
-    h1 {
-      font-size: 2.5em;
-      margin-bottom: 0.5em;
-    }
-    p {
-      font-size: 1.2em;
-      margin-bottom: 2em;
-    }
+  
     nav a {
-      display: inline-block;
-      margin: 0 15px;
-      font-size: 1.1em;
-      color: #007BFF;
+      margin: 0 10px;
       text-decoration: none;
-      border-bottom: 2px solid transparent;
-      padding-bottom: 2px;
-      transition: border-color 0.2s;
+      color: var(--link-color);
+      font-weight: bold;
     }
-    nav a:hover {
-      border-color: #007BFF;
+  
+    #theme-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: 1px solid var(--link-color);
+      padding: 0.4rem 0.8rem;
+      color: var(--link-color);
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
     }
-    footer {
-      margin-top: 3em;
-      font-size: 0.9em;
-      color: #777;
+
+    @media print {
+      #theme-toggle {
+        display: none;
+      }
     }
   </style>
 </head>
@@ -54,5 +72,35 @@
     &copy; 2025 KothaTales. All rights reserved.
   </footer>
 
+  <script>
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
+    // Check query param ?theme=dark or ?theme=light
+    const urlParams = new URLSearchParams(window.location.search);
+    const themeParam = urlParams.get('theme');
+  
+    // Set theme
+    let currentTheme = themeParam || (prefersDark ? 'dark' : 'light');
+  
+    document.documentElement.setAttribute('data-theme', currentTheme);
+  
+    // Toggle Button Logic
+    const toggleButton = document.createElement('button');
+    toggleButton.id = 'theme-toggle';
+    toggleButton.innerText = currentTheme === 'dark' ? '☀ Light Mode' : '🌙 Dark Mode';
+  
+    toggleButton.onclick = () => {
+      const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      toggleButton.innerText = newTheme === 'dark' ? '☀ Light Mode' : '🌙 Dark Mode';
+      // Update URL without reloading
+      const newUrl = new URL(window.location);
+      newUrl.searchParams.set('theme', newTheme);
+      window.history.replaceState({}, '', newUrl);
+    };
+  
+    document.body.appendChild(toggleButton);
+  </script>
+  
 </body>
 </html>
