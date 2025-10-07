@@ -5,33 +5,66 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Privacy Policy | KothaTales</title>
   <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #222222;
+      --link-color: #007BFF;
+    }
+  
+    [data-theme="dark"] {
+      --bg-color: #121212;
+      --text-color: #eeeeee;
+      --link-color: #66ccff;
+    }
+  
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.8;
-      padding: 40px;
-      max-width: 900px;
-      margin: auto;
-      background-color: #ffffff;
-      color: #333;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Segoe UI', sans-serif;
+      padding: 2rem;
+      line-height: 1.7;
+      transition: background-color 0.3s, color 0.3s;
     }
-    h1, h2 {
-      color: #111;
+  
+    nav {
+      text-align: center;
+      margin-bottom: 2rem;
     }
-    h1 {
-      font-size: 2em;
-      margin-bottom: 0.5em;
+  
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: var(--link-color);
+      font-weight: bold;
     }
-    h2 {
-      margin-top: 1.5em;
-      font-size: 1.3em;
+  
+    #theme-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: 1px solid var(--link-color);
+      padding: 0.4rem 0.8rem;
+      color: var(--link-color);
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
     }
-    ul {
-      margin-left: 20px;
+
+    @media print {
+      #theme-toggle {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
-
+  
+  <nav style="margin-bottom: 30px; text-align: center;">
+    <a href="index.html" style="margin-right: 20px; text-decoration: none; color: #007BFF;">Home</a>
+    <a href="terms-and-conditions.html" style="margin-right: 20px; text-decoration: none; color: #007BFF;">Terms</a>
+    <a href="privacy-policy.html" style="text-decoration: none; color: #007BFF;">Privacy</a>
+  </nav>
   <h1>Privacy Policy</h1>
   <p><strong>Effective Date:</strong> October 7, 2025</p>
 
@@ -124,5 +157,35 @@
 
   <p>Thank you for trusting KothaTales.</p>
 
+  <script>
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
+    // Check query param ?theme=dark or ?theme=light
+    const urlParams = new URLSearchParams(window.location.search);
+    const themeParam = urlParams.get('theme');
+  
+    // Set theme
+    let currentTheme = themeParam || (prefersDark ? 'dark' : 'light');
+  
+    document.documentElement.setAttribute('data-theme', currentTheme);
+  
+    // Toggle Button Logic
+    const toggleButton = document.createElement('button');
+    toggleButton.id = 'theme-toggle';
+    toggleButton.innerText = currentTheme === 'dark' ? '☀ Light Mode' : '🌙 Dark Mode';
+  
+    toggleButton.onclick = () => {
+      const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      toggleButton.innerText = newTheme === 'dark' ? '☀ Light Mode' : '🌙 Dark Mode';
+      // Update URL without reloading
+      const newUrl = new URL(window.location);
+      newUrl.searchParams.set('theme', newTheme);
+      window.history.replaceState({}, '', newUrl);
+    };
+  
+    document.body.appendChild(toggleButton);
+  </script>
+  
 </body>
 </html>
