@@ -1,59 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>KothaTales Account Deletion Request</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 2rem;
-      max-width: 600px;
-      line-height: 1.6;
-    }
-    h1 {
-      color: #d9534f;
-    }
-    button {
-      background-color: #d9534f;
-      color: white;
-      border: none;
-      padding: 0.8rem 1.5rem;
-      font-size: 1.2rem;
-      cursor: pointer;
-      border-radius: 5px;
-      margin-top: 1rem;
-    }
-    button:hover {
-      background-color: #c9302c;
-    }
-    pre {
-      background: #f8f8f8;
-      border: 1px solid #ccc;
-      padding: 1rem;
-      white-space: pre-wrap;
-    }
-    a {
-      color: #d9534f;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>KothaTales Account Deletion Request</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 30px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        h1 {
+            color: #d9534f;
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .notice {
+            background-color: #fff3f3;
+            border-left: 4px solid #d9534f;
+            padding: 12px 16px;
+            margin-bottom: 1.5rem;
+            color: #a94442;
+            font-size: 0.95rem;
+        }
+
+        p,
+        li {
+            font-size: 1rem;
+            color: #333;
+        }
+
+        ul {
+            padding-left: 1.2rem;
+            margin-top: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section {
+            margin-bottom: 1.5rem;
+        }
+
+        .email-address {
+            color: #d9534f;
+            font-weight: bold;
+            font-size: 1.05rem;
+        }
+
+        .copy-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px 12px;
+            border-radius: 5px;
+            margin-top: 8px;
+            word-break: break-all;
+        }
+
+        .copy-text {
+            flex: 1;
+            font-size: 0.95rem;
+            color: #444;
+        }
+
+        .copy-btn {
+            background: #d9534f;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: #c9302c;
+        }
+
+        .email-button {
+            display: inline-block;
+            background-color: #d9534f;
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .email-button:hover {
+            background-color: #c9302c;
+        }
+
+        pre {
+            background: #f9f9f9;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 0.95rem;
+            white-space: pre-wrap;
+            word-break: break-word;
+            position: relative;
+        }
+    </style>
 </head>
+
 <body>
-  <h1>Request Account Deletion - KothaTales</h1>
-  <p>
-    If you want to delete your KothaTales account, please send a deletion request email from your registered email address.
-  </p>
-  <p>
-    Click the button below to open your email client with a pre-filled email. Please review and send it.
-  </p>
+    <div class="container">
+        <h1>Request Account Deletion</h1>
 
-  <button id="emailBtn">Send Account Deletion Request</button>
+        <div class="notice">
+            <strong>Note:</strong> Account deletion is a <em>manual process</em> and may take a few business days to
+            complete. We appreciate your patience.
+        </div>
 
-  <h2>Email Template</h2>
-  <p>You can also copy and paste this email if the button does not work:</p>
-  <pre>
-Subject: Account Deletion Request - KothaTales
+        <div class="section">
+            <p>If you want to delete your KothaTales account, you can:</p>
+            <ul>
+                <li>Request deletion from the <strong>KothaTales app</strong> via <em>Profile & Settings → Delete
+                        Account</em></li>
+                <li>Or send an email request from your <strong>registered email address</strong></li>
+            </ul>
+        </div>
 
+        <div class="section">
+            <p>Send your email to:</p>
+            <div class="copy-wrapper">
+                <span class="copy-text" id="emailAddress">kothatalesapp@gmail.com</span>
+                <button class="copy-btn" data-copy-target="emailAddress">Copy</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Email Subject</h2>
+            <div class="copy-wrapper">
+                <span class="copy-text" id="emailSubject">Account Deletion Request - KothaTales</span>
+                <button class="copy-btn" data-copy-target="emailSubject">Copy</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Email Body Template</h2>
+            <div class="copy-wrapper" style="flex-direction: column; align-items: stretch;">
+                <pre id="emailBodyText">
 Hello KothaTales Support Team,
 
 I would like to request the deletion of my KothaTales account associated with this email address.
@@ -62,21 +172,40 @@ Please confirm once the account is deleted.
 
 Thank you,
 KothaTales User
-  </pre>
+        </pre>
+                <button class="copy-btn" data-copy-target="emailBodyText"
+                    style="align-self: flex-end; margin-top: 10px;">Copy</button>
+            </div>
+        </div>
 
-  <script>
-    document.getElementById("emailBtn").addEventListener("click", function () {
-      const email = "support@kothatales.com";
-      const subject = encodeURIComponent("Account Deletion Request - KothaTales");
-      const body = encodeURIComponent(
-        `Hello KothaTales Support Team,\n\n` +
-        `I would like to request the deletion of my KothaTales account associated with this email address.\n\n` +
-        `Please confirm once the account is deleted.\n\n` +
-        `Thank you,\nKothaTales User`
-      );
+        <div class="section" style="text-align: center;">
+            <div>You can click the button below to pre-fill an email draft (may not work on all devices):</div>
+            <a class="email-button"
+                href="mailto:kothatalesapp@gmail.com?subject=Account%20Deletion%20Request%20-%20KothaTales&body=Hello%20KothaTales%20Support%20Team,%0D%0A%0D%0AI%20would%20like%20to%20request%20the%20deletion%20of%20my%20KothaTales%20account%20associated%20with%20this%20email%20address.%0D%0A%0D%0APlease%20confirm%20once%20the%20account%20is%20deleted.%0D%0A%0D%0AThank%20you,%0D%0AKothaTales%20User">
+                Draft Deletion Request Email
+            </a>
+        </div>
+    </div>
 
-      window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
-    });
-  </script>
+    <script>
+        // Copy to clipboard functionality
+        document.querySelectorAll('button.copy-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.getAttribute('data-copy-target');
+                const targetElem = document.getElementById(targetId);
+                const text = targetElem.innerText.trim();
+
+                navigator.clipboard.writeText(text)
+                    .then(() => {
+                        button.textContent = 'Copied!';
+                        setTimeout(() => button.textContent = 'Copy', 1500);
+                    })
+                    .catch(() => {
+                        alert('Failed to copy text.');
+                    });
+            });
+        });
+    </script>
 </body>
+
 </html>
