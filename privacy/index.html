@@ -6,56 +6,93 @@
   <title>Privacy Policy | KothaTales</title>
   <style>
     :root {
-      --bg-color: #ffffff;
-      --text-color: #222222;
-      --link-color: #007BFF;
-    }
-  
-    [data-theme="dark"] {
-      --bg-color: #121212;
-      --text-color: #eeeeee;
-      --link-color: #66ccff;
-    }
-  
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      font-family: 'Segoe UI', sans-serif;
-      padding: 2rem;
-      line-height: 1.7;
-      transition: background-color 0.3s, color 0.3s;
-    }
-  
-    nav {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-  
-    nav a {
-      margin: 0 10px;
-      text-decoration: none;
-      color: var(--link-color);
-      font-weight: bold;
-    }
-  
-    #theme-toggle {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      background: none;
-      border: 1px solid var(--link-color);
-      padding: 0.4rem 0.8rem;
-      color: var(--link-color);
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 0.9rem;
-    }
-
-    @media print {
-      #theme-toggle {
-        display: none;
+          --bg-color: #ffffff;
+          --text-color: #222222;
+          --link-color: #007BFF;
       }
-    }
+    
+      [data-theme="dark"] {
+          --bg-color: #121212;
+          --text-color: #eeeeee;
+          --link-color: #66ccff;
+      }
+    
+    
+      body {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          line-height: 1.8;
+          padding: 40px;
+          max-width: 900px;
+          margin: auto;
+      }
+    
+      body {
+          background-color: var(--bg-color);
+          color: var(--text-color);
+          font-family: 'Segoe UI', sans-serif;
+          padding: 2rem;
+          line-height: 1.7;
+          transition: background-color 0.3s, color 0.3s;
+      }
+    
+    
+      h1 {
+          font-size: 2em;
+          margin-bottom: 0.5em;
+      }
+    
+      h2 {
+          margin-top: 1.5em;
+          font-size: 1.3em;
+      }
+    
+      ul {
+          margin-left: 20px;
+      }
+    
+      nav {
+          text-align: center;
+          margin-bottom: 2rem;
+      }
+    
+      nav a {
+          margin: 0 10px;
+          text-decoration: none;
+          color: var(--link-color);
+          border-bottom: 2px solid transparent;
+          font-weight: bold;
+      }
+    
+      a {
+          color: var(--link-color);
+      }
+    
+       a:hover {
+          border-color: #007BFF;
+      }
+    
+      nav a:hover {
+          border-color: #007BFF;
+      }
+    
+      #theme-toggle {
+          position: fixed;
+          top: 1rem;
+          right: 1rem;
+          background: none;
+          border: 1px solid var(--link-color);
+          padding: 0.4rem 0.8rem;
+          color: var(--link-color);
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 0.9rem;
+      }
+    
+      @media print {
+          #theme-toggle {
+              display: none;
+          }
+      }
   </style>
 </head>
 <body>
