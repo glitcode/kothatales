@@ -6,6 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>KothaTales Account Deletion Request</title>
     <style>
+        :root {
+            --bg-color: #f4f4f4;
+            --text-color: #222;
+            --container-bg: #fff;
+            --primary-color: #d9534f;
+            --primary-hover: #c9302c;
+            --border-color: #ccc;
+            --notice-bg: #fff3f3;
+            --notice-text: #a94442;
+            --copy-bg: #f9f9f9;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --container-bg: #1e1e1e;
+            --primary-color: #ff5c57;
+            --primary-hover: #e04843;
+            --border-color: #333;
+            --notice-bg: #2a1a1a;
+            --notice-text: #ff9999;
+            --copy-bg: #2b2b2b;
+        }
+
         * {
             box-sizing: border-box;
         }
@@ -14,37 +38,38 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
-            background-color: #f4f4f4;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
         }
 
         .container {
             max-width: 600px;
             margin: auto;
-            background: white;
+            background: var(--container-bg);
             padding: 30px 20px;
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
 
         h1 {
-            color: #d9534f;
+            color: var(--primary-color);
             font-size: 1.6rem;
             margin-bottom: 1rem;
         }
 
         .notice {
-            background-color: #fff3f3;
-            border-left: 4px solid #d9534f;
+            background-color: var(--notice-bg);
+            border-left: 4px solid var(--primary-color);
             padding: 12px 16px;
             margin-bottom: 1.5rem;
-            color: #a94442;
+            color: var(--notice-text);
             font-size: 0.95rem;
         }
 
         p,
         li {
             font-size: 1rem;
-            color: #333;
         }
 
         ul {
@@ -58,7 +83,7 @@
         }
 
         .email-address {
-            color: #d9534f;
+            color: var(--primary-color);
             font-weight: bold;
             font-size: 1.05rem;
         }
@@ -68,22 +93,21 @@
             align-items: center;
             justify-content: space-between;
             gap: 10px;
-            background: #f9f9f9;
-            border: 1px solid #ddd;
+            background: var(--copy-bg);
+            border: 1px solid var(--border-color);
             padding: 10px 12px;
             border-radius: 5px;
             margin-top: 8px;
-            word-break: break-all;
+            word-break: break-word;
         }
 
         .copy-text {
             flex: 1;
             font-size: 0.95rem;
-            color: #444;
         }
 
         .copy-btn {
-            background: #d9534f;
+            background: var(--primary-color);
             color: white;
             border: none;
             padding: 6px 12px;
@@ -94,34 +118,58 @@
         }
 
         .copy-btn:hover {
-            background: #c9302c;
+            background: var(--primary-hover);
         }
 
         .email-button {
             display: inline-block;
-            background-color: #d9534f;
+            background-color: var(--primary-color);
             color: white;
             text-decoration: none;
             padding: 12px 25px;
             font-size: 1.1rem;
             border-radius: 5px;
             transition: background-color 0.3s ease;
-            margin-top: 10px;
+            margin-top: 12px;
         }
 
         .email-button:hover {
-            background-color: #c9302c;
+            background-color: var(--primary-hover);
         }
 
         pre {
-            background: #f9f9f9;
+            background: var(--copy-bg);
             padding: 15px;
-            border: 1px solid #ccc;
+            border: 1px solid var(--border-color);
             border-radius: 5px;
             font-size: 0.95rem;
             white-space: pre-wrap;
             word-break: break-word;
-            position: relative;
+        }
+
+        #theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            padding: 8px 12px;
+            font-size: 0.9rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        #theme-toggle:hover {
+            background: var(--primary-hover);
+        }
+
+        @media print {
+            #theme-toggle {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -188,23 +236,45 @@ KothaTales User
     </div>
 
     <script>
-        // Copy to clipboard functionality
+        // Copy buttons
         document.querySelectorAll('button.copy-btn').forEach(button => {
             button.addEventListener('click', () => {
                 const targetId = button.getAttribute('data-copy-target');
                 const targetElem = document.getElementById(targetId);
                 const text = targetElem.innerText.trim();
 
-                navigator.clipboard.writeText(text)
-                    .then(() => {
-                        button.textContent = 'Copied!';
-                        setTimeout(() => button.textContent = 'Copy', 1500);
-                    })
-                    .catch(() => {
-                        alert('Failed to copy text.');
-                    });
+                navigator.clipboard.writeText(text).then(() => {
+                    button.textContent = 'Copied!';
+                    setTimeout(() => button.textContent = 'Copy', 1500);
+                }).catch(() => {
+                    alert('Failed to copy text.');
+                });
             });
         });
+
+        // Theme toggle logic
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const urlParams = new URLSearchParams(window.location.search);
+        const themeParam = urlParams.get('theme');
+        let currentTheme = themeParam || (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', currentTheme);
+
+        const toggleButton = document.createElement('button');
+        toggleButton.id = 'theme-toggle';
+        toggleButton.innerText = currentTheme === 'dark' ? '☀ Light Mode' : '🌙 Dark Mode';
+
+        toggleButton.onclick = () => {
+            const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            toggleButton.innerText = newTheme === 'dark' ? '☀ Light Mode' : '🌙 Dark Mode';
+
+            // Update query param
+            const newUrl = new URL(window.location);
+            newUrl.searchParams.set('theme', newTheme);
+            window.history.replaceState({}, '', newUrl);
+        };
+
+        document.body.appendChild(toggleButton);
     </script>
 </body>
 
